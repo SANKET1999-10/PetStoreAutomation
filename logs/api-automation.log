@@ -1,0 +1,16 @@
+2026-05-08 17:14:38.122 [main] INFO  api.test.UserTests - *******Creating User********
+2026-05-08 17:14:41.688 [main] INFO  api.test.UserTests - *******User is Created********
+2026-05-08 17:14:41.716 [main] INFO  api.test.UserTests - *******Reading User info********
+2026-05-08 17:14:43.315 [main] INFO  api.test.UserTests - *******User info is displayed********
+2026-05-08 17:14:43.318 [main] INFO  api.test.UserTests - *******Updating User********
+2026-05-08 17:14:44.763 [main] INFO  api.test.UserTests - *******User is updated********
+2026-05-08 17:14:46.253 [main] INFO  api.test.UserTests - *******Deleting User********
+2026-05-08 17:14:47.655 [main] INFO  api.test.UserTests - *******User is deleted********
+2026-05-08 17:16:18.189 [main] INFO  api.test.UserTests - *******Creating User********
+2026-05-08 17:16:21.829 [main] INFO  api.test.UserTests - *******User is Created********
+2026-05-08 17:16:21.855 [main] INFO  api.test.UserTests - *******Reading User info********
+2026-05-08 17:16:23.310 [main] INFO  api.test.UserTests - *******User info is displayed********
+2026-05-08 17:16:23.313 [main] INFO  api.test.UserTests - *******Updating User********
+2026-05-08 17:16:25.033 [main] INFO  api.test.UserTests - *******User is updated********
+2026-05-08 17:16:26.515 [main] INFO  api.test.UserTests - *******Deleting User********
+2026-05-08 17:16:28.022 [main] INFO  api.test.UserTests - *******User is deleted********
