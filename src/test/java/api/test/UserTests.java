@@ -1,9 +1,10 @@
 package api.test;
 
 import org.apache.logging.log4j.LogManager;
+
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import api.endpoints.userEndpointsMethodImplementation;
@@ -17,25 +18,25 @@ public class UserTests {
 	User userPayload;
 	public Logger logger;
 	
-	@BeforeTest
-	public void SetupDate () {
-		
-		faker = new Faker ();
-		userPayload = new User();
-		userPayload.setId(faker.idNumber().hashCode());
-		userPayload.setUsername(faker.name().username());
-		userPayload.setFirstname(faker.name().firstName());
-		userPayload.setLastname(faker.name().lastName());
-		userPayload.setEmail(faker.internet().safeEmailAddress());
-		userPayload.setPassword(faker.internet().password(5,10));
-		userPayload.setPhone(faker.phoneNumber().cellPhone());
-		
-		// logs
-		
-		logger = LogManager.getLogger(this.getClass());
+	@BeforeClass(alwaysRun = true)
+	public void SetupDate() {
+
+	    logger = LogManager.getLogger(UserTests.class);
+
+	    faker = new Faker();
+
+	    userPayload = new User();
+
+	    userPayload.setId(faker.idNumber().hashCode());
+	    userPayload.setUsername(faker.name().username());
+	    userPayload.setFirstname(faker.name().firstName());
+	    userPayload.setLastname(faker.name().lastName());
+	    userPayload.setEmail(faker.internet().safeEmailAddress());
+	    userPayload.setPassword(faker.internet().password(5,10));
+	    userPayload.setPhone(faker.phoneNumber().cellPhone());
 	}
 	
-	@Test(priority=1)
+	@Test(priority=1,groups={"smoke","create"})
 	public void testPostUser () {
 		
 		logger.info("*******Creating User********");
@@ -48,7 +49,7 @@ public class UserTests {
 		logger.info("*******User is Created********");
 	}
 	
-	@Test(priority=2)
+	@Test(priority=2,groups={"smoke","read"})
 	public void getTestuserByName () {
 		
 		logger.info("*******Reading User info********");
@@ -59,7 +60,7 @@ public class UserTests {
 		logger.info("*******User info is displayed********");
 	}
 	
-	@Test(priority=3)
+	@Test(priority=3,groups={"regression","update"})
 	public void testUpdateuserByName () {
 		
 		logger.info("*******Updating User********");
@@ -82,7 +83,7 @@ public class UserTests {
 		
 	}
 	
-	@Test(priority=4)
+	@Test(priority=4, groups={"regression","delete"})
 	public void testDeleteUserByName () {
 		
 		logger.info("*******Deleting User********");
