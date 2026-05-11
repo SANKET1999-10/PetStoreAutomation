@@ -45,7 +45,7 @@ public class UserTests {
 		
 		Assert.assertEquals(response.getStatusCode(), 200);
 		System.out.println("Username: " + this.userPayload.getUsername());
-		System.out.println("Webhook Trigger Testt");
+		System.out.println("Webhook Trigger Test");
 		
 		logger.info("*******User is Created********");
 	}
