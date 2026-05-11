@@ -1,46 +1,46 @@
 package api.test;
 
 import org.apache.logging.log4j.LogManager;
-
 import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import api.endpoints.userEndpointsMethodImplementation;
+import api.endpoints.userEndpointsMethodImplementation2;
 import api.payload.User;
 import io.restassured.response.Response;
 import net.datafaker.Faker;
 
-public class UserTests {
+public class UserTests2 {
 	
 	Faker faker;
 	User userPayload;
 	public Logger logger;
 	
-	@BeforeClass(alwaysRun = true)
-	public void SetupDate() {
-
-	    logger = LogManager.getLogger(UserTests.class);
-
-	    faker = new Faker();
-
-	    userPayload = new User();
-
-	    userPayload.setId(faker.idNumber().hashCode());
-	    userPayload.setUsername(faker.name().username());
-	    userPayload.setFirstname(faker.name().firstName());
-	    userPayload.setLastname(faker.name().lastName());
-	    userPayload.setEmail(faker.internet().safeEmailAddress());
-	    userPayload.setPassword(faker.internet().password(5,10));
-	    userPayload.setPhone(faker.phoneNumber().cellPhone());
+	@BeforeTest
+	public void SetupDate () {
+		
+		faker = new Faker ();
+		userPayload = new User();
+		userPayload.setId(faker.idNumber().hashCode());
+		userPayload.setUsername(faker.name().username());
+		userPayload.setFirstname(faker.name().firstName());
+		userPayload.setLastname(faker.name().lastName());
+		userPayload.setEmail(faker.internet().safeEmailAddress());
+		userPayload.setPassword(faker.internet().password(5,10));
+		userPayload.setPhone(faker.phoneNumber().cellPhone());
+		
+		// logs
+		
+		logger = LogManager.getLogger(this.getClass());
 	}
 	
-	@Test(priority=1,groups={"smoke","create"})
+	@Test(priority=1)
 	public void testPostUser () {
 		
 		logger.info("*******Creating User********");
-		Response response= userEndpointsMethodImplementation.Createuser(userPayload);
+		Response response= userEndpointsMethodImplementation2.Createuser(userPayload);
 		response.then().log().all();
 		
 		Assert.assertEquals(response.getStatusCode(), 200);
@@ -49,18 +49,18 @@ public class UserTests {
 		logger.info("*******User is Created********");
 	}
 	
-	@Test(priority=2,groups={"smoke","read"})
+	@Test(priority=2)
 	public void getTestuserByName () {
 		
 		logger.info("*******Reading User info********");
-		Response response = userEndpointsMethodImplementation.Readeuser(this.userPayload.getUsername());
+		Response response = userEndpointsMethodImplementation2.Readeuser(this.userPayload.getUsername());
 		response.then().log().all();
 		Assert.assertEquals(response.getStatusCode(),200);
 		
 		logger.info("*******User info is displayed********");
 	}
 	
-	@Test(priority=3,groups={"regression","update"})
+	@Test(priority=3)
 	public void testUpdateuserByName () {
 		
 		logger.info("*******Updating User********");
@@ -70,7 +70,7 @@ public class UserTests {
 		userPayload.setLastname(faker.name().lastName());
 		userPayload.setEmail(faker.internet().safeEmailAddress());
 		
-		Response response = userEndpointsMethodImplementation.Updateeuser(this.userPayload.getUsername(), userPayload);
+		Response response = userEndpointsMethodImplementation2.Updateeuser(this.userPayload.getUsername(), userPayload);
 		response.then().log().all();
 		//  response.then().log().body().statusCode(200);   Restassured assertion this also we can use
 		Assert.assertEquals(response.getStatusCode(), 200);
@@ -78,17 +78,17 @@ public class UserTests {
 		logger.info("*******User is updated********");
 		
 		// Checking data after update
-		Response responseAfterupdate = userEndpointsMethodImplementation.Readeuser(this.userPayload.getUsername());
+		Response responseAfterupdate = userEndpointsMethodImplementation2.Readeuser(this.userPayload.getUsername());
 		Assert.assertEquals(responseAfterupdate.getStatusCode(), 200);
 		
 	}
 	
-	@Test(priority=4, groups={"regression","delete"})
+	@Test(priority=4)
 	public void testDeleteUserByName () {
 		
 		logger.info("*******Deleting User********");
 		
-		Response response = userEndpointsMethodImplementation.Deleteeuser(this.userPayload.getUsername());
+		Response response = userEndpointsMethodImplementation2.Deleteeuser(this.userPayload.getUsername());
 		Assert.assertEquals(response.getStatusCode(), 200);
 		
 		logger.info("*******User is deleted********");
