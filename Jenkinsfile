@@ -33,5 +33,9 @@ pipeline {
                 bat "mvn test -Dgroups=${params.TEST_SUITE}"
             }
         }
+        
+        stage('Deploy Reports') {
+    steps {
+        bat 'xcopy target\\surefire-reports C:\\CD-Deploy\\Reports /E /I /Y'
     }
 }
