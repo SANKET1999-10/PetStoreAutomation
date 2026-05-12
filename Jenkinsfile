@@ -5,6 +5,14 @@ pipeline {
         maven 'MyMaven'
     }
 
+    parameters {
+        choice(
+            name: 'TEST_SUITE',
+            choices: ['smoke', 'regression'],
+            description: 'Select Test Suite'
+        )
+    }
+
     stages {
 
         stage('Checkout Code') {
@@ -22,7 +30,7 @@ pipeline {
 
         stage('Run API Tests') {
             steps {
-                bat 'mvn test -Dgroups=smoke'
+                bat "mvn test -Dgroups=${params.TEST_SUITE}"
             }
         }
     }
